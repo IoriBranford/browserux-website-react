@@ -13,10 +13,10 @@
  * browser without blocking the initial render.
  */
 
-import { Outlet, NavLink } from 'react-router-dom';
-import styles from './RootLayout.module.css';
+import { Outlet } from 'react-router-dom';
 import NavigateLoader from '../components/NavigateLoader/NavigateLoader';
 import { useEffect } from 'react';
+import NavBar from '../components/NavBar/NavBar';
 
 // ---------------------------------------------------------------------------- //
 //
@@ -30,20 +30,6 @@ import { useEffect } from 'react';
  * Application shell component mounted as the root route element.
  */
 export default function RootLayout() {
-
-  /**
-   * ## 🔗 getLinkClass
-   *
-   * Returns the CSS module class for active `NavLink` elements.
-   * Returns `undefined` (not a falsy string) for inactive links so React
-   * omits the `className` attribute entirely rather than setting it to `""`.
-   *
-   * @param isActive - Whether the link's path matches the current URL
-   * @returns Active CSS class or undefined
-   */
-  const getLinkClass = ({ isActive }: { isActive: boolean }): string | undefined =>
-    isActive ? styles.active : undefined;
-
   /**
    * ## 🔌 Web Component Bootstrap
    *
@@ -65,28 +51,7 @@ export default function RootLayout() {
       {/** Displays a top-of-page progress bar during route transitions */}
       <NavigateLoader />
 
-      <nav className={styles.nav}>
-
-        <div>
-
-          {/** Active class applied automatically by NavLink when path matches '/' */}
-          <NavLink to="/" className={getLinkClass}>
-            Home
-          </NavLink>
-
-          {/** Visual separator between nav links */}
-          <span className={styles.separator}> | </span>
-
-          {/** Active class applied automatically by NavLink when path matches '/about' */}
-          <NavLink to="/about" className={getLinkClass}>
-            About
-          </NavLink>
-        </div>
-
-        {/** Custom web component — registered via the useEffect lazy import above */}
-        <browserux-theme-switcher></browserux-theme-switcher>
-
-      </nav>
+      <NavBar />
 
       {/** Renders the matched child route component (Home, About, etc.) */}
       <Outlet />
