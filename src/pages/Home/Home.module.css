@@ -1,0 +1,27 @@
+/**
+ * 🏠 Home.module.css
+ *
+ * Scoped overrides for the Home page, composed with the global `.page` class.
+ *
+ * The full page layout (flex column, min-height, padding, entrance animation)
+ * is provided by `.page` in `global.css`. This module only defines styles
+ * that are specific to the Home page content.
+ */
+
+
+/* ============================================================================
+ *
+ * ### 📝 Content Typography
+ *
+ * Text size overrides for Home page body content.
+ *
+ * ============================================================================ */
+
+/**
+ * Sets the intro paragraph text to a larger-than-default reading size,
+ * giving the Home page copy more visual prominence than standard body text.
+ */
+
+.home p {
+  font-size: 2rem;
+}

@@ -1,0 +1,47 @@
+{
+    "name": "browserux-website",
+    "version": "1.0.0",
+    "description": "Standards-first BrowserUX React 19 SPA template with PWA, Workbox, native CSS, and Web Components",
+    "type": "module",
+    "engines": {
+        "node": "20 || >=22"
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "dependencies": {
+        "browserux-pwa-ui": "^1.1.0",
+        "browserux-share-button": "^1.1.1",
+        "browserux-theme-switcher": "^1.1.2",
+        "browserux.css": "^4.0.0",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "react-router-dom": "^7.6.2"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "^4.5.1",
+        "@testing-library/jest-dom": "^6.4.0",
+        "@testing-library/react": "^16.0.0",
+        "@testing-library/user-event": "^14.5.0",
+        "dotenv": "^16.5.0",
+        "happy-dom": "^15.0.0",
+        "vitest": "^3.0.0",
+        "glob": "^11.0.2",
+        "vite": "^6.3.5",
+        "vite-plugin-image-optimize": "^2.0.1",
+        "vite-plugin-inject-sw-assets": "^1.1.0",
+        "vite-plugin-preload-assets": "^1.3.0",
+        "vite-plugin-pwa": "^1.2.0",
+        "vite-plugin-seo-files": "^2.1.1",
+        "workbox-precaching": "^7.3.0",
+        "workbox-routing": "^7.3.0",
+        "workbox-strategies": "^7.3.0",
+        "typescript": "^5.0.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0"
+    }
+}

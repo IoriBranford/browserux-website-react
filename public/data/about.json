@@ -1,0 +1,26 @@
+{
+  "title": "About this template",
+  "paragraphs": [
+    "This is the <strong>BrowserUX Starter Vite + React</strong>, a production-ready single-page application built with <strong>React 19</strong>, React Router v7, and Vite as the build tool.",
+    "It comes fully configured for deployment: PWA support, a custom service worker with Workbox, offline fallback, optimized builds, and SEO basics out of the box. The codebase is structured and commented to be maintainable and easy to extend, making it a solid starting point for real projects.",
+    "<code>main.jsx</code> is the entry point of the app, wiring together the router and the root render. <code>RootLayout.jsx</code> handles persistent UI (nav, transitions), while each page component fetches its own data from a static JSON file via a route loader before rendering."
+  ],
+  "featuresTitle": "What's included",
+  "features": [
+    "⚛️ React 19 with <code>createRoot</code> and <code>createBrowserRouter</code>",
+    "⚡ Vite for ultra-fast development and optimized builds",
+    "🧩 Dynamic routing with <code>react-router-dom</code> (<code>createBrowserRouter</code>)",
+    "📁 Clean SPA structure with root layout, pages, navigation, and 404 handling",
+    "🎨 UX-first CSS with <code>browserux.css</code> + <code>global.css</code>",
+    "🔥 Installable PWA using <code>vite-plugin-pwa</code> with <code>injectManifest</code> mode",
+    "🧠 Custom service worker with Workbox and offline fallback",
+    "🗃️ Smart offline support: <code>offline.html</code>, precache, <code>sw-assets.js</code>",
+    "🧰 Built-in scripts: image optimization, sitemap generation, dynamic precache",
+    "🚦 Global loading component for route transitions (<code>NavigateLoader.jsx</code>)",
+    "📦 Static data management via <code>.json</code> files (<code>/public/data</code>)",
+    "🤝 <code>&lt;browserux-theme-switcher&gt;</code>: dark/light toggle Web Component",
+    "📤 <code>&lt;browserux-share-button&gt;</code>: native Web Share API Web Component",
+    "🔄 <code>&lt;browserux-pwa-ui&gt;</code>: install prompt and update notification Web Component",
+    "🌙 Dark mode ready with alternate favicons and CSS variables"
+  ]
+}

@@ -1,0 +1,83 @@
+/**
+ * ⏳ NavigateLoader.module.css
+ *
+ * Animated top-of-page progress bar displayed during React Router route transitions.
+ *
+ * The bar is always `width: 100%` and full-gradient; the illusion of a moving
+ * colored stripe is created by continuously translating the element from
+ * `translateX(-100%)` to `translateX(100%)`. At any moment, only the central
+ * colored band of the gradient is visible inside the viewport, while the
+ * page-background-colored edges remain off-screen — producing a seamless,
+ * clip-free shimmer with no hard cut at the viewport boundary.
+ *
+ * Key features:
+ * - Fixed to the top edge of the viewport, above all other layers (`z-index: 9999`)
+ * - Gradient uses design tokens so the bar adapts automatically to light/dark mode
+ * - Infinite `linear` animation for a consistent, uninterrupted sweep
+ */
+
+
+/* ============================================================================
+ *
+ * ### 📊 Loader Bar
+ *
+ * The visible progress indicator: a thin fixed strip that stays above all
+ * page content, including the navigation bar. Its gradient and animation
+ * work together to produce the traveling shimmer effect described above.
+ *
+ * ============================================================================ */
+
+/**
+ *  1. `position: fixed` with `top: 0; left: 0` pins the bar to the very top
+ *     of the viewport, independent of scroll position.
+ *  2. `width: 100%` ensures the full gradient always spans the viewport width;
+ *     the translation animation moves it beyond both edges so the shimmer
+ *     enters and exits cleanly without a visible snap.
+ *  3. The gradient runs from `--bux-page-bg` → `--bux-color-secondary` → `--bux-page-bg`,
+ *     making the colored stripe appear to travel across the screen as the element
+ *     translates. Using page-background at both ends avoids hard edges at the
+ *     viewport boundary with no clipping required.
+ *  4. `z-index: 9999` places the bar above the navigation bar and all
+ *     other stacking contexts in the layout.
+ */
+
+.navigateLoader {
+  position: fixed; /* 1 */
+  top: 0; /* 1 */
+  left: 0; /* 1 */
+  width: 100%; /* 2 */
+  height: 4px;
+  background: linear-gradient( /* 3 */
+    90deg,
+    var(--bux-page-bg) 0%,
+    var(--bux-color-secondary) 50%,
+    var(--bux-page-bg) 100%
+  );
+  animation: loaderBar 1s infinite linear;
+  z-index: 9999; /* 4 */
+}
+
+
+/* ============================================================================
+ *
+ * ### 🎬 Animation
+ *
+ * Defines the `loaderBar` keyframe that drives the shimmer sweep.
+ *
+ * ============================================================================ */
+
+/**
+ * Slides the full-width gradient element from fully off-screen left to fully
+ * off-screen right over one second. Combined with the symmetric gradient,
+ * this makes the colored midpoint travel across the viewport in a single pass
+ * before looping seamlessly. `linear` timing keeps the sweep speed constant.
+ */
+
+@keyframes loaderBar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

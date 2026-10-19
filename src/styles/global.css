@@ -1,0 +1,163 @@
+/**
+ * 🌐 global.css
+ *
+ * Application-wide stylesheet loaded once at startup via `src/main.js`.
+ *
+ * Builds on top of the BrowserUX base stylesheet (`browserux.css`) and adds:
+ * - A global list-style reset
+ * - A shared page entrance animation (`fade-in-up`)
+ * - A reusable `.page` layout class used by all page components
+ * - Global fixed positioning for the floating share button Web Component
+ *
+ * Key features:
+ * - `.page` provides a full-height centered column layout with entrance animation
+ * - `min-height` accounts for the navigation bar height via `calc(100dvh - 5rem)`
+ * - `browserux-share-button` is globally positioned here for consistent placement
+ */
+
+/* ============================================================================
+ *
+ * ### 📦 Foundation Import
+ *
+ * Pulls in the project's design token layer (`browserux.css`) so all `--bux-*`
+ * custom properties are available to every rule in this file.
+ *
+ * ============================================================================ */
+
+/**
+ * Loads the project token stylesheet which itself imports the upstream
+ * `browserux.css` library. All `--bux-*` tokens for colors, typography,
+ * and scrollbar styling flow from here into the rules below.
+ */
+
+@import "./browserux.css";
+
+
+/* ============================================================================
+ *
+ * ### 🧱 Global Resets
+ *
+ * Overrides browser default styles that conflict with the application's design.
+ * Applied globally so individual components do not need to repeat these rules.
+ *
+ * ============================================================================ */
+
+/**
+ * Removes the default bullet/disc marker from all list items globally.
+ * Semantic list structure is preserved in the HTML; only the visual marker
+ * is stripped, allowing each component to define its own list presentation.
+ */
+
+li {
+    list-style: none;
+}
+
+
+
+/* ============================================================================
+ *
+ * ### 🏠 Page Layout
+ *
+ * The `.page` class is the shared layout contract for all routed page
+ * components (Home, About…). It provides a vertically centered flex column,
+ * a consistent entrance animation, and a height that fills the viewport
+ * minus the persistent navigation bar.
+ *
+ * ============================================================================ */
+
+/**
+ *  1. Vertically and horizontally centers page content as a flex column.
+ *  2. Plays the entrance animation once on mount; `forwards` keeps the
+ *     final keyframe state so content remains visible after the animation ends.
+ *  3. `calc(100dvh - 5rem)` fills the viewport height minus the nav bar
+ *     height (5rem, set in RootLayout's `.nav`). `dvh` accounts for mobile
+ *     browser chrome that `vh` would ignore, preventing overflow on iOS Safari.
+ *  4. Asymmetric bottom padding (5rem) provides clearance above the fixed
+ *     floating share button so it does not overlap page content.
+ */
+
+.page {
+    align-items: center; /* 1 */
+    animation: fade-in-up 0.3s ease-out forwards; /* 2 */
+    display: flex;
+    flex-direction: column; /* 1 */
+    gap: 3rem;
+    justify-content: center; /* 1 */
+    min-height: calc(100dvh - 5rem); /* 3 */
+    padding: 2rem 2rem 5rem; /* 4 */
+    text-align: center;
+}
+
+/**
+ * Constrains page hero images to a readable width regardless of their
+ * natural dimensions, preventing them from dominating the layout on
+ * large viewports.
+ */
+
+.page img {
+    max-width: 300px;
+}
+
+/**
+ * Styles inline code elements to improve readability and visual distinction
+ * within demo content. Applies a subtle background, rounded corners,
+ * and consistent typography to match the design system.
+ */
+
+.page code {
+    background: var(--bux-code-bg);
+    border-radius: 5px;
+    color: var(--bux-code-color);
+    font-size: 1.6rem;
+    padding: 2px 5px;
+}
+
+/* ============================================================================
+ *
+ * ### 🎬 Animations
+ *
+ * Defines the `fade-in-up` entrance keyframe used by both `.demo` and `.error-page`.
+ * Content starts invisible and 50 px above its resting position, then settles
+ * to full opacity at its natural position over 300 ms with an `ease-out` curve.
+ *
+ * ============================================================================ */
+
+/**
+ * # fade-in-up — Page Content Entrance Animation
+ *
+ * Slides content in from slightly above its natural position while fading
+ * from transparent to fully opaque. Starting at `translateY(-50px)` ensures
+ * the element is off its layout position before the animation begins,
+ * preventing a visible jump. `ease-out` makes the motion decelerate naturally.
+ */
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(-50px); 
+    }
+    to {
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================================
+ *
+ * ### 🧩 Web Components
+ *
+ * Layout and positioning overrides for custom elements from the
+ * BrowserUX component library.
+ *
+ * ============================================================================ */
+
+/**
+ * Fixes the share button to the bottom-right corner of the viewport,
+ * keeping it persistently reachable as the user scrolls through the page.
+ */
+
+browserux-share-button {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+}

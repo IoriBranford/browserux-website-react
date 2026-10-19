@@ -1,0 +1,9 @@
+{
+  "title": "BrowserUX Starter",
+  "subtitle": "Vite + ReactJS",
+  "introChapo": "Welcome to BrowserUX Starter, a minimal, UX-first front-end template.",
+  "intro": [ 
+    "Use it as a foundation to build fast, accessible, and responsive web projects.",
+    "Feel free to modify, extend, and make it your own!"
+  ]
+} 

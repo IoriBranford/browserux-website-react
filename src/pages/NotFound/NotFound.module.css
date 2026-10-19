@@ -1,0 +1,86 @@
+/**
+ * 🔍 NotFound.module.css
+ *
+ * Scoped overrides for the 404 / error boundary page rendered by `NotFound.jsx`.
+ *
+ * The full-viewport centered layout is provided by the global `.page` class.
+ * This module only defines the styles that are specific to the error page:
+ * the oversized emoji indicator, the message text size, and the CTA button.
+ *
+ * Key features:
+ * - Large `.emoji` class scales the 🔍 icon to display size
+ * - Touch-target-safe CTA button (`min-height: 44px` per WCAG 2.5.5)
+ * - Button colors drawn from design tokens for automatic light/dark adaptation
+ */
+
+
+/* ============================================================================
+ *
+ * ### 🔍 Emoji Indicator
+ *
+ * Visual metaphor displayed above the 404 heading.
+ *
+ * ============================================================================ */
+
+/**
+ * Scales the emoji to a display size large enough to read as an illustration
+ * rather than inline text. `10rem` (100 px at base font size) provides
+ * sufficient visual weight without crowding the heading below.
+ */
+
+.emoji {
+    font-size: 10rem;
+}
+
+
+/* ============================================================================
+ *
+ * ### 📝 Error Message
+ *
+ * Typographic override for the descriptive paragraph beneath the heading.
+ *
+ * ============================================================================ */
+
+/**
+ * Increases the error description paragraph to a comfortable reading size,
+ * consistent with the body text scale used across other page components.
+ */
+
+.errorPage p {
+    font-size: 2rem;
+}
+
+
+/* ============================================================================
+ *
+ * ### 🔘 CTA Button
+ *
+ * Recovery action button that navigates the user back to the home route.
+ *
+ * ============================================================================ */
+
+/**
+ *  1. `min-height: 44px` satisfies the WCAG 2.5.5 target size criterion,
+ *     ensuring the button is large enough to tap reliably on touch devices.
+ *  2. `transition: .3s` animates the background color change on hover
+ *     for smooth interactive feedback.
+ */
+
+.errorPage button {
+    background: var(--bux-color-secondary);
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    min-height: 44px; /* 1 */
+    padding: 0 30px;
+    transition: .3s; /* 2 */
+}
+
+/**
+ * Shifts the button to the primary accent on hover, providing clear feedback
+ * while staying within the design token palette.
+ */
+
+.errorPage button:hover {
+    background: var(--bux-color-primary);
+}

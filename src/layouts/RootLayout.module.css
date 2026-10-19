@@ -1,0 +1,108 @@
+/**
+ * 🧭 RootLayout.module.css
+ *
+ * Scoped styles for the persistent application shell rendered by `RootLayout.jsx`.
+ *
+ * Styles the top navigation bar and its interactive link states,
+ * including the active-route highlight applied by React Router's `NavLink`.
+ *
+ * Key features:
+ * - Fixed-height nav bar (`5rem`) — referenced by `global.css` via `calc(100dvh - 5rem)`
+ *   to ensure page content fills exactly the remaining viewport height
+ * - Space-between layout keeps branding/links left and the theme switcher right
+ * - Smooth color transition on link hover and active states via design tokens
+ */
+
+
+/* ============================================================================
+ *
+ * ### 🧭 Navigation Bar
+ *
+ * Horizontal bar fixed at the top of the layout. Contains the navigation
+ * links on the left and the `<browserux-theme-switcher>` on the right.
+ *
+ * The `height: 5rem` value is load-bearing: `global.css` uses
+ * `calc(100dvh - 5rem)` for page min-height so that content fills
+ * exactly the viewport area below this bar without overflow.
+ *
+ * ============================================================================ */
+
+/**
+ *  1. `height: 5rem` sets the nav bar height referenced by `global.css`
+ *     in `calc(100dvh - 5rem)` — change both together if the height changes.
+ *  2. `justify-content: space-between` pushes the link group to the left
+ *     and the theme switcher web component to the far right.
+ *  3. `padding-inline` keeps content away from the viewport edges on all screen sizes.
+ */
+
+.nav {
+    align-items: center;
+    display: flex;
+    font-size: 2rem;
+    gap: 1rem;
+    height: 5rem; /* 1 */
+    justify-content: space-between; /* 2 */
+    padding-inline: 2rem; /* 3 */
+}
+
+
+/* ----------------------------------------------------------------------------
+ * ## 🔗 Link States
+ * ---------------------------------------------------------------------------- */
+
+/**
+ * Base style for all anchor elements inside the nav.
+ * Removes the default underline and sets the resting color from the page token
+ * so links adapt automatically to light/dark mode without extra overrides.
+ * The `transition` smooths the color change on hover and active state.
+ */
+
+.nav a {
+    color: var(--bux-page-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+/**
+ * Hover state — shifts link color to the primary accent for visual feedback.
+ * Matches the active state color intentionally: hovering over an active link
+ * produces no jarring contrast shift.
+ */
+
+.nav a:hover {
+    color: var(--bux-color-primary);
+}
+
+/**
+ * Active route state — applied by React Router's `NavLink` via the
+ * `getLinkClass` helper in `RootLayout.jsx` when the link's path matches
+ * the current URL. Bold weight reinforces which page is currently open
+ * without relying on color alone (accessibility).
+ */
+
+.nav a.active {
+    color: var(--bux-color-primary);
+    font-weight: bold;
+}
+
+
+/* ============================================================================
+ *
+ * ### ✏️ Separator
+ *
+ * Visual divider rendered as a `|` pipe character between navigation links.
+ *
+ * ============================================================================ */
+
+/**
+ * Dims the separator to de-emphasise it relative to the link text.
+ * `position: relative` with `top: -1px` corrects a sub-pixel vertical
+ * misalignment between the pipe glyph and the surrounding link text
+ * caused by the font's baseline metrics.
+ */
+
+.separator {
+    opacity: 0.5;
+    position: relative;
+    top: -1px;
+}

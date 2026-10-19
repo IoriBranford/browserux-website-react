@@ -1,0 +1,67 @@
+/**
+ * 📄 About.module.css
+ *
+ * Scoped styles for the About page component (Vite + React).
+ *
+ * Applied via CSS Modules — all class names are locally scoped to the About
+ * component and referenced through the `styles` object in JSX, so these rules
+ * never leak to other pages or components.
+ *
+ * Key features:
+ * - Slightly reduces list font size to visually distinguish feature items from prose
+ * - Adds vertical rhythm spacing between list items
+ * - Constrains paragraph line length and centers text blocks for comfortable reading
+ */
+
+/* ============================================================================
+ *
+ * ### 📝 About Page — Typography & Layout
+ *
+ * Fine-tunes font sizes, vertical spacing, and content-width constraints for
+ * the About page's three main content elements: prose paragraphs, the
+ * unordered feature list, and individual list items.
+ *
+ * All rules build on top of the global base styles, applying only the
+ * minimal overrides needed for the About page's content-heavy layout.
+ *
+ * ============================================================================ */
+
+/**
+ * # List — Font Size
+ *
+ * Slightly reduces the font size below the global body text (2rem)
+ * to visually distinguish feature-list items from the prose paragraphs above,
+ * without creating too large a contrast between the two text levels.
+ */
+
+.about ul {
+  font-size: 1.8rem;
+}
+
+/**
+ * # List Item — Vertical Spacing
+ *
+ * Adds breathing room between consecutive feature list items.
+ * Prevents items from appearing cramped, especially at the reduced font size.
+ */
+
+.about li {
+  margin-top: 0.5rem;
+}
+
+/**
+ * # Paragraph — Font Size & Width Constraint
+ *
+ *  1. Maintains the global body font size (2rem) for comfortable prose reading;
+ *     stated explicitly to guard against inheritance from nested contexts.
+ *  2. Centers the paragraph block horizontally within its parent via logical
+ *     inline-axis margins — avoids directional `margin: 0 auto` shorthand.
+ *  3. Caps the line length at 800px (~80 characters at 2rem), a well-established
+ *     readability threshold that prevents overly long lines on wide viewports.
+ */
+
+.about p {
+  font-size: 2rem; /* 1 */
+  margin-inline: auto; /* 2 */
+  max-width: 800px; /* 3 */
+}

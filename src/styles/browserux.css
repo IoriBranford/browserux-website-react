@@ -1,0 +1,187 @@
+/**
+ * 🎨 browserux.css
+ *
+ * Project-level design token overrides built on top of the `browserux.css` foundation.
+ *
+ * Imports the upstream `browserux.css` library (reset, normalization, utility rules),
+ * then redefines its CSS custom properties on `:root` to match this project's
+ * visual identity — colors, typography, scrollbar, form states, and text selection.
+ *
+ * Dark mode is supported through two parallel mechanisms:
+ * - `@media (prefers-color-scheme: dark)`: automatic OS-level dark mode
+ * - `[data-theme="dark"]`: manual override set by `<browserux-theme-switcher>`
+ *
+ * Key features:
+ * - Full color palette via `:root` custom properties
+ * - Form validation state tokens (valid / invalid colors and backgrounds)
+ * - Scrollbar theming tokens (width, track, thumb, hover)
+ * - Text selection inversion for high-contrast highlighting
+ * - System font stacks for both proportional and monospace text
+ */
+
+/* ============================================================================
+ *
+ * ### 📦 Foundation Import
+ *
+ * Pulls in the upstream `browserux.css` library as the CSS foundation.
+ * This provides the CSS reset, cross-browser normalization, scrollbar styling,
+ * form UX rules, and utility classes that this project builds on top of.
+ *
+ * Custom property tokens defined below in `:root` override the library's
+ * own defaults, allowing full visual customization without forking the source.
+ *
+ * ============================================================================ */
+
+/**
+ * Loads `browserux.css` from the installed npm package.
+ * All `--bux-*` custom properties defined below will override
+ * the library's defaults through the CSS cascade.
+ */
+
+@import "browserux.css/browserux.css";
+
+/* ============================================================================
+ *
+ * ### 🎨 Design Tokens
+ *
+ * Defines all `--bux-*` custom properties used by the `browserux.css` library
+ * and throughout the project's own components. These tokens act as the single
+ * source of truth for every visual property — colors, form states, progress
+ * indicators, text selection, scrollbar appearance, and typography.
+ *
+ * Organized into six functional groups:
+ * - 🎨 Color palette (page, primary, secondary, transparent)
+ * - ✅ Form validation states (valid / invalid borders, backgrounds, placeholders)
+ * - 📊 Progress bar (track background and fill color)
+ * - ✏️ Text selection (inverted highlight for high contrast)
+ * - 📜 Scrollbar (gutter, track, thumb, hover, width/height)
+ * - 🔤 Typography (font families, base size, line height)
+ * - 💻 Code tag (background and color)
+ *
+ * ============================================================================ */
+
+/**
+ * Declares the light-mode default values for all design tokens.
+ * These are overridden for dark mode via `@media (prefers-color-scheme: dark)`
+ * and `[data-theme="dark"]` defined further below.
+ */
+
+:root {
+  /**
+   * 🎨 Color palette
+   */
+  --bux-page-bg: #eaeaea; /* Page background color (light grey) */
+  --bux-page-color: #121212; /* Page text color (near-black) */
+  --bux-color-primary: #f05e0e; /* Primary accent — warm orange; used for buttons, focus rings, range thumbs */
+  --bux-color-secondary: #0e93f0; /* Secondary accent — blue; used for scrollbar thumb, links, highlights */
+  --bux-transparent: transparent; /* Utility alias for transparent backgrounds and borders */
+
+  /**
+   * ✅ Form validation tokens
+   */
+  --bux-valid-border-color: #29b94c; /* Border color applied to valid input fields */
+  --bux-valid-bg-color: #f0fff5; /* Background tint applied to valid input fields */
+  --bux-invalid-border-color: #dc303e; /* Border color applied to invalid input fields */
+  --bux-invalid-bg-color: #fff0f0; /* Background tint applied to invalid input fields */
+  --bux-placeholder-color: #aaa; /* Placeholder text color for all inputs in their default state */
+  --bux-invalid-placeholder-color: #dc303e; /* Placeholder color overridden to red when the field is invalid */
+
+  /**
+   * 📊 Progress bar tokens
+   */
+  --bux-progress-bar-bg: #efefef; /* Track (rail) background color of `<progress>` elements */
+  --bux-progress-value-bg: #29b94c; /* Fill color of the progress value indicator */
+
+  /**
+   * ✏️ Text selection tokens
+   */
+  --bux-selection-bg: var(--bux-page-color); /* Selection highlight uses the text color — inverts for high contrast */
+  --bux-selection-color: var(--bux-page-bg); /* Selected text color uses the page background — inverts for high contrast */
+  --bux-selection-text-shadow: none; /* Removes text shadow from selections to avoid visual noise */
+
+  /**
+   * 📜 Scrollbar tokens
+   */
+  --bux-scrollbar: var(--bux-page-bg); /* Outer scrollbar gutter background, matched to the page background */
+  --bux-scrollbar-track: #ddecf6; /* Scrollbar track color — the rail visible behind the thumb */
+  --bux-scrollbar-thumb: var(--bux-color-secondary); /* Scrollbar thumb (draggable handle) uses the secondary accent color */
+  --bux-scrollbar-thumb-hover: var(--bux-color-primary); /* Thumb color shifts to primary accent on hover for visual feedback */
+  --bux-scrollbar-vertical-width: 10px; /* Width of the vertical scrollbar */
+  --bux-scrollbar-horizontal-height: 10px; /* Height of the horizontal scrollbar */
+
+  /**
+   * 🔤 Typography tokens
+   */
+  --bux-typo-font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'; /* System font stack — prefers the native OS UI font with broad cross-platform fallbacks */
+  --bux-typo-font-family-mono: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace; /* Monospace stack for code, pre, and kbd elements */
+  --bux-typo-font-size: 1.6rem; /* Base font size — equals 16px when the root is set to 62.5% (10px) */
+  --bux-typo-line-height: 1.6; /* Base line height — unitless so it scales proportionally with font size */
+
+  /**
+   * 💻 Code tokens
+   */
+  --bux-code-bg: #fff;
+  --bux-code-color: var(--bux-page-color);
+}
+
+/* ============================================================================
+ *
+ * ### 🌑 Dark Mode
+ *
+ * Overrides the four core color tokens for dark mode.
+ * Only the palette tokens need to change — all other tokens (form states,
+ * scrollbar widths, typography) remain the same across light and dark themes.
+ *
+ * Two mechanisms are provided so both automatic and manual theme switching work:
+ * - `@media (prefers-color-scheme: dark)` — respects the OS-level preference
+ * - `[data-theme="dark"]` — responds to the attribute set by `<browserux-theme-switcher>`
+ *
+ * The selection tokens (`--bux-selection-bg` / `--bux-selection-color`) invert
+ * automatically because they reference `--bux-page-color` and `--bux-page-bg`,
+ * which are both redefined here — no separate overrides needed.
+ *
+ * ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+ * ## 🖥 OS-Level Dark Mode
+ * ---------------------------------------------------------------------------- */
+
+/**
+ * Activates dark color tokens when the operating system is set to dark mode.
+ * This rule fires automatically based on the user's system preference,
+ * independently of any in-page theme toggle.
+ */
+
+@media (prefers-color-scheme: dark) {
+  /**
+   * Overrides only the four palette tokens that differ in dark mode.
+   * Background lightens to a dark grey; text lightens to near-white;
+   * accent colors shift to softer, less saturated variants for readability on dark backgrounds.
+   */
+
+  :root {
+    --bux-page-bg: #333; /* Dark mode page background */
+    --bux-page-color: #eaeaea; /* Dark mode text color */
+    --bux-color-primary: #eb8a55; /* Desaturated warm orange for readability on dark backgrounds */
+    --bux-color-secondary: #58aae3; /* Desaturated blue for readability on dark backgrounds */
+    --bux-code-bg: #555;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * ## 🎛 Manual Dark Mode Override
+ * ---------------------------------------------------------------------------- */
+
+/**
+ * Activates dark color tokens when `data-theme="dark"` is set on any ancestor element.
+ * Applied by `<browserux-theme-switcher>` on `<html>` when the user manually
+ * selects dark mode, overriding the OS preference if needed.
+ */
+
+[data-theme="dark"] {
+  --bux-page-bg: #333; /* Dark mode page background */
+  --bux-page-color: #eaeaea; /* Dark mode text color */
+  --bux-color-primary: #eb8a55; /* Desaturated warm orange for readability on dark backgrounds */
+  --bux-color-secondary: #58aae3; /* Desaturated blue for readability on dark backgrounds */
+  --bux-code-bg: #555;
+}

@@ -1,0 +1,171 @@
+/**
+ * ⚠️ offline.css
+ *
+ * Scoped stylesheet for all error pages (404, 500, offline, etc.).
+ * Loaded only via `error-pages.js` — intentionally excluded from the main
+ * bundle so these styles are never fetched on normal page visits.
+ *
+ * Provides a centered, full-viewport layout with a fade-in-up entrance
+ * animation, sized content elements (image, error code, message, button),
+ * and a themed action button that uses the project's design tokens.
+ *
+ * Key features:
+ * - Full-height flex container with vertical and horizontal centering
+ * - Entrance animation via `fade-in-up` keyframes on `.error-page`
+ * - Design tokens from `browserux.css` for button colors and theming
+ * - `min-height: 44px` on the button meets the Apple HIG touch target minimum
+ */
+
+/* ============================================================================
+ *
+ * ### 📦 Foundation Import
+ *
+ * Imports the project's design token stylesheet so `--bux-*` custom properties
+ * are available for button colors and any future token-driven rules in this file.
+ *
+ * ============================================================================ */
+
+/**
+ * Loads `browserux.css` (the project token layer) to make `--bux-color-primary`
+ * and `--bux-color-secondary` available for the action button styles below.
+ */
+
+@import "./browserux.css";
+
+/* ============================================================================
+ *
+ * ### 🧱 Error Page Layout
+ *
+ * Defines the full-viewport centered container for all error page content.
+ * Uses flexbox to stack children vertically and center them on both axes.
+ * A `5rem` offset in `min-height` leaves room for a fixed site header.
+ * The fade-in-up entrance animation plays once on load for a polished feel.
+ *
+ * ============================================================================ */
+
+/**
+ * Full-viewport centered column layout for the error page content.
+ * Subtracts `5rem` from `100dvh` to account for a fixed site header.
+ * Bottom padding (`5rem`) prevents content from hugging the viewport edge.
+ */
+
+.error-page {
+    align-items: center;
+    animation: fade-in-up 0.3s ease-out forwards;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: center;
+    min-height: calc(100dvh - 5rem);
+    padding: 2rem 2rem 5rem;
+    text-align: center;
+}
+
+/* ============================================================================
+ *
+ * ### 🧩 Content Elements
+ *
+ * Sizes the individual pieces of the error page: the illustrative image,
+ * the large error code display, and the explanatory paragraph.
+ *
+ * ============================================================================ */
+
+/**
+ * Constrains the error illustration or icon to a consistent fixed width.
+ * Height scales automatically to preserve the image's aspect ratio.
+ */
+
+.error-page img {
+    width: 150px;
+}
+
+/**
+ * Renders the error code (e.g. "404", "500") at a large display size.
+ * The `span` is used as a typographic display element rather than a heading
+ * so the heading hierarchy of the page is not affected.
+ */
+
+.error-page span {
+    font-size: 10rem;
+}
+
+/**
+ * Styles the human-readable error description paragraph.
+ * Capped at `800px` and centered with `margin-inline: auto` to keep
+ * long messages readable on wide viewports.
+ */
+
+.error-page p {
+    font-size: 2rem;
+    margin-inline: auto;
+    max-width: 800px;
+}
+
+/* ============================================================================
+ *
+ * ### 🔘 Action Button
+ *
+ * Styles the primary call-to-action button (e.g. "Go back", "Return home").
+ * Uses design tokens for colors so the button adapts automatically to
+ * light and dark mode. A `min-height` of 44px meets the Apple HIG
+ * touch target minimum for accessible tap areas on mobile devices.
+ *
+ * ============================================================================ */
+
+/**
+ * Primary action button with a secondary-color background, rounded corners,
+ * and a smooth color transition on hover.
+ */
+
+.error-page button {
+    background: var(--bux-color-secondary);
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    min-height: 44px;
+    padding: 0 30px;
+    transition: .3s;
+}
+
+/**
+ * Shifts the button background to the primary accent color on hover,
+ * providing clear interactive feedback using the existing token palette.
+ */
+
+.error-page button:hover {
+    background: var(--bux-color-primary);
+}
+
+/* ============================================================================
+ *
+ * ### ✨ Animation
+ *
+ * Defines the `fade-in-up` keyframe used by `.error-page` to animate the
+ * entire page content into view on load.
+ *
+ * The content starts invisible and offset 50px above its natural position,
+ * then transitions to fully opaque at its natural position. Combined with
+ * `ease-out` timing and `forwards` fill mode, this creates a quick,
+ * decelerating entrance that settles cleanly without snapping back.
+ *
+ * ============================================================================ */
+
+/**
+ * # fade-in-up — Page Entrance Animation
+ *
+ * Animates the error page container from above its resting position (−50 px)
+ * and transparent to its final position at full opacity.
+ * `translateY(-50px)` combined with `opacity: 0` ensures the content is
+ * invisible before the animation begins, avoiding a flash of unstyled content.
+ */
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0; 
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
