@@ -104,6 +104,12 @@ li {
  * and consistent typography to match the design system.
  */
 
+
+.page pre {
+    background: var(--bux-code-bg);
+    text-align: start;
+}
+
 .page code {
     background: var(--bux-code-bg);
     border-radius: 5px;
