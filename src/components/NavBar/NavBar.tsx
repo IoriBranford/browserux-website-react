@@ -33,6 +33,12 @@ export default function NavBar() {
         <NavLink to="/about" className={getLinkClass}>
           About
         </NavLink>
+
+        <span className={styles.separator}> | </span>
+
+        <NavLink to="/honeysoldier/genesisdev" className={getLinkClass}>
+          Honey Soldier MD
+        </NavLink>
       </div>
 
       {/** Custom web component — registered via the useEffect lazy import above */}

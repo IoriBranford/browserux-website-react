@@ -42,6 +42,8 @@ import About from './pages/About/About.tsx';
  */
 import NotFound from './pages/NotFound/NotFound.tsx';
 
+import MDArticle from './pages/MDArticle/MDArticle.tsx';
+
 // ---------------------------------------------------------------------------- //
 //
 //  ### 🏗️ Layout
@@ -90,6 +92,13 @@ const routes: RouteObject[] = [
         element: <About />,
         /** Pre-fetches about page data before the component renders */
         loader: async () => fetch('/data/about.json')
+      },
+      {
+        /** Renders <About /> at '/about' */
+        path: 'honeysoldier/genesisdev',
+        element: <MDArticle />,
+        /** Pre-fetches about page data before the component renders */
+        loader: async () => fetch('/honeysoldier-genesis.md')
       }
     ]
   }
