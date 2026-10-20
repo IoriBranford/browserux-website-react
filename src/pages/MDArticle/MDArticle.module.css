@@ -1,0 +1,17 @@
+/**
+ * # Paragraph — Font Size & Width Constraint
+ *
+ *  1. Maintains the global body font size (2rem) for comfortable prose reading;
+ *     stated explicitly to guard against inheritance from nested contexts.
+ *  2. Centers the paragraph block horizontally within its parent via logical
+ *     inline-axis margins — avoids directional `margin: 0 auto` shorthand.
+ *  3. Caps the line length at 800px (~80 characters at 2rem), a well-established
+ *     readability threshold that prevents overly long lines on wide viewports.
+ */
+
+.mdarticle p {
+  text-align: justify;
+  font-size: 2rem; /* 1 */
+  margin-inline: auto; /* 2 */
+  max-width: 800px; /* 3 */
+}
